@@ -4,7 +4,6 @@
   "description": "Train Schedule BE",
   "main": "functions/server.js",
   "scripts": {
-    "build": "nodemon server-local.js",
     "start": "nodemon server-local.js"
   },
   "engines": {
