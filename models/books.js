@@ -12,7 +12,7 @@ async function getRoutesByFromCode(fromCode) {
       JOIN stations s1 ON (r.station_code_from = s1.code)
       JOIN stations s2 ON (r.station_code_to = s2.code)
     WHERE
-      rd.station_code = :fromCode
+      rd.station_code = :fromCode AND r.station_code_to <> :fromCode
     ORDER BY
       station_name_from ASC
     `,
