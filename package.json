@@ -4,8 +4,11 @@
   "description": "Train Schedule BE",
   "main": "functions/server.js",
   "scripts": {
-    "build": "netlify-lambda build express",
-    "start": "nodemon --experimental-modules server-local.js"
+    "build": "nodemon server-local.js",
+    "start": "nodemon server-local.js"
+  },
+  "engines": {
+    "node": "14.x"
   },
   "keywords": [],
   "author": "",
