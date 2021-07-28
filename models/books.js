@@ -4,7 +4,8 @@ const db = require("../database/connection");
 async function getRoutesByFromCode(fromCode) {
   const stations = await db.query(
     `SELECT
-      r.id, s1.name as station_name_from, s2.name as station_name_to, r.remarks
+      r.id, r.station_code_from, s1.name as station_name_from,
+      r.station_code_to, s2.name as station_name_to, r.remarks
     FROM
       route_details rd
       JOIN routes r ON (rd.route_id = r.id)
