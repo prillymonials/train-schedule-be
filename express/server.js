@@ -24,5 +24,11 @@ app.use('/stations', stationRoutes);
 app.use('/schedules', scheduleRoutes);
 app.use('/books', bookRoutes);
 
+const router = express.Router();
+router.get('/', (req, res) => {
+  res.json({ message: 'Hello' });
+});
+app.use('/.netlify/functions/server', router);
+
 module.exports = app;
 module.exports.handler = serverless(app);
