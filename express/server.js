@@ -1,12 +1,11 @@
-import express from 'express';
-import cors from 'cors';
+const express = require('express');
+const cors = require('cors');
 
-// import db from './database/connection.js';
-import stationRoutes from '../routes/stations.js';
-import scheduleRoutes from '../routes/schedules.js';
-import authRoutes from '../routes/auth.js';
-import bookRoutes from '../routes/books.js';
-import serverless from 'serverless-http';
+const stationRoutes = require('../routes/stations.js');
+const scheduleRoutes = require('../routes/schedules.js');
+const authRoutes = require('../routes/auth.js');
+const bookRoutes = require('../routes/books.js');
+const serverless = require('serverless-http');
 
 const app = express();
 
@@ -25,14 +24,5 @@ app.use('/stations', stationRoutes);
 app.use('/schedules', scheduleRoutes);
 app.use('/books', bookRoutes);
 
-// const PORT = process.env.PORT || 5000;
-
-// db.authenticate().then(() => {
-//   app.listen(PORT, () => {
-//     console.log(`Server running on port: ${PORT}`);
-//   });
-// }).catch((error) => {
-//   console.error('Unable to connect to the database:', error);
-// })
-export default app;
-export const handler = serverless(app);
+module.exports = app;
+module.exports.handler = serverless(app);

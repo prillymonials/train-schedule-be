@@ -1,10 +1,10 @@
-import {
+const {
   getAllSchedules,
   getAllSchedulesByStationCode,
   getSchedulesById,
-} from "../models/schedules.js";
+} = require("../models/schedules.js");
 
-export const getSchedules = async (req, res) => {
+const getSchedules = async (req, res) => {
   try {
     const stationCode = req.params.stationCode;
     let schedules = [];
@@ -21,7 +21,7 @@ export const getSchedules = async (req, res) => {
   }
 };
 
-export const getScheduleDetailById = async (req, res) => {
+const getScheduleDetailById = async (req, res) => {
   try {
     const scheduleId = req.params.scheduleId;
     const schedules = await getSchedulesById(scheduleId);
@@ -29,4 +29,9 @@ export const getScheduleDetailById = async (req, res) => {
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
+};
+
+module.exports = {
+  getSchedules,
+  getScheduleDetailById,
 };

@@ -1,7 +1,7 @@
-import sq from "sequelize";
-import db from "../database/connection.js";
+const sq = require("sequelize");
+const db = require("../database/connection");
 
-export async function getAllSchedules() {
+async function getAllSchedules() {
   const schedules = await db.query(
     `SELECT
       sc.id, sc.train_id, sc.train_line, s1.name as station_from, s2.name as station_to, sc.start_time, sc.end_time
@@ -19,7 +19,7 @@ export async function getAllSchedules() {
   return schedules;
 }
 
-export async function getAllSchedulesByStationCode(stationCode) {
+async function getAllSchedulesByStationCode(stationCode) {
   const schedules = await db.query(
     `SELECT DISTINCT
       sc.id, sc.train_id, sc.train_line, s1.name as station_from, s2.name as station_to, sc.start_time, sc.end_time
@@ -43,7 +43,7 @@ export async function getAllSchedulesByStationCode(stationCode) {
   return schedules;
 }
 
-export async function getSchedulesById(scheduleId) {
+async function getSchedulesById(scheduleId) {
   const schedules = await db.query(
     `SELECT
       scd.id, scd.schedule_id, st.name, scd.arrival_time
@@ -61,3 +61,9 @@ export async function getSchedulesById(scheduleId) {
   
   return schedules;
 }
+
+module.exports = {
+  getAllSchedules,
+  getAllSchedulesByStationCode,
+  getSchedulesById,
+};

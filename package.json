@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Train Schedule BE",
   "main": "functions/server.js",
-  "type": "module",
   "scripts": {
     "build": "netlify-lambda build express",
     "start": "nodemon --experimental-modules server-local.js"

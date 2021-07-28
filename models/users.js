@@ -1,7 +1,7 @@
-import sq from "sequelize";
-import db from "../database/connection.js";
+const sq = require("sequelize");
+const db = require("../database/connection");
 
-export async function getUserByUsername(username) {
+async function getUserByUsername(username) {
   const user = await db.query(
     'SELECT id, username, password FROM users WHERE username = :username',
     {
@@ -13,7 +13,7 @@ export async function getUserByUsername(username) {
   return user;
 }
 
-export async function addUser(username, password) {
+async function addUser(username, password) {
   const user = await db.query(
     'INSERT INTO users(username, password) VALUES (:username, :password)',
     {
@@ -24,3 +24,8 @@ export async function addUser(username, password) {
   
   return user;
 }
+
+module.exports = {
+  getUserByUsername,
+  addUser,
+};

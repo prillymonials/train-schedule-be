@@ -1,5 +1,5 @@
-import express from 'express';
-import {
+const express = require('express');
+const {
   getRoutesByOrigin,
   getDestionationByRoutesId,
   getTimeScheduleFromRoutesAndOrigin,
@@ -8,7 +8,7 @@ import {
   getActiveBooks,
   getHistoryBooks,
   getTodayBooks,
-} from '../controllers/books.js';
+} = require('../controllers/books.js');
 
 const router = express.Router();
 
@@ -21,4 +21,4 @@ router.get('/stations/:routeId', getDestionationByRoutesId);
 router.get('/schedules/:routeId/:code', getTimeScheduleFromRoutesAndOrigin);
 router.get('/rates/:codeFrom/:codeTo', getRatesFromOriginAndDestination);
 
-export default router;
+module.exports = router;

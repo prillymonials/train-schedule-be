@@ -1,7 +1,7 @@
-import sq from "sequelize";
-import db from "../database/connection.js";
+const sq = require("sequelize");
+const db = require("../database/connection");
 
-export async function getRoutesByFromCode(fromCode) {
+async function getRoutesByFromCode(fromCode) {
   const stations = await db.query(
     `SELECT
       r.id, s1.name as station_name_from, s2.name as station_name_to, r.remarks
@@ -24,7 +24,7 @@ export async function getRoutesByFromCode(fromCode) {
   return stations;
 }
 
-export async function getStationDestination(routeId) {
+async function getStationDestination(routeId) {
   const stations = await db.query(
     `SELECT rd.station_code, st.name
     FROM route_details rd JOIN stations st ON (rd.station_code = st.code)
@@ -40,7 +40,7 @@ export async function getStationDestination(routeId) {
   return stations;
 }
 
-export async function getTimeByRouteAndStationCode(routeId, stationCode) {
+async function getTimeByRouteAndStationCode(routeId, stationCode) {
   const arrivalTime = await db.query(
     `SELECT scd.id, scd.station_code, scd.arrival_time
     FROM
@@ -57,7 +57,7 @@ export async function getTimeByRouteAndStationCode(routeId, stationCode) {
   return arrivalTime;
 }
 
-export async function getRatesStation(stationCodeFrom, stationCodeTo) {
+async function getRatesStation(stationCodeFrom, stationCodeTo) {
   const rates = await db.query(
     `SELECT id, rate FROM rates
     WHERE station_code_from = :stationCodeFrom AND station_code_to = :stationCodeTo
@@ -71,7 +71,7 @@ export async function getRatesStation(stationCodeFrom, stationCodeTo) {
   return rates;
 }
 
-export async function createBook(userId, routeId, stationCodeFrom, stationCodeTo, bookTime, bookDate, rate) {
+async function createBook(userId, routeId, stationCodeFrom, stationCodeTo, bookTime, bookDate, rate) {
   const user = await db.query(
     `INSERT INTO books(user_id, route_id, station_code_from, station_code_to, book_time, book_date, rate)
     VALUES (:userId, :routeId, :stationCodeFrom, :stationCodeTo, :bookTime, :bookDate, :rate)`,
@@ -84,7 +84,7 @@ export async function createBook(userId, routeId, stationCodeFrom, stationCodeTo
   return user;
 }
 
-export async function getBooksByStatus(userId, status) {
+async function getBooksByStatus(userId, status) {
   let bookStatusQuery;
   let sortDate;
   if (status === 'ACTIVE') {
@@ -135,3 +135,12 @@ export async function getBooksByStatus(userId, status) {
   
   return rates;
 }
+
+module.exports = {
+  getRoutesByFromCode,
+  getStationDestination,
+  getTimeByRouteAndStationCode,
+  getRatesStation,
+  createBook,
+  getBooksByStatus,
+};

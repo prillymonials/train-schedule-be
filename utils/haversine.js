@@ -1,4 +1,4 @@
-export default function getHaversine(lat1, lon1, lat2, lon2) {
+function getHaversine(lat1, lon1, lat2, lon2) {
   const R = 6371e3; // metres
   const latRad1 = lat1 * Math.PI/180; // φ, λ in radians
   const latRad2 = lat2 * Math.PI/180;
@@ -15,3 +15,4 @@ export default function getHaversine(lat1, lon1, lat2, lon2) {
   return d;
 }
 
+module.exports = getHaversine;

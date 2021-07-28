@@ -1,8 +1,8 @@
-import express from 'express';
-import { getStations } from '../controllers/stations.js';
+const express = require('express');
+const { getStations } = require('../controllers/stations.js');
 
 const router = express.Router();
 
 router.get('/', getStations);
 
-export default router;
+module.exports = router;

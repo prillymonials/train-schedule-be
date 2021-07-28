@@ -1,7 +1,7 @@
-import { getAllStations } from "../models/stations.js";
-import getHaversine from "../utils/haversine.js";
+const { getAllStations } = require("../models/stations.js");
+const getHaversine = require("../utils/haversine.js");
 
-export const getStations = async (req, res) => {
+const getStations = async (req, res) => {
   try {
     const lat = req.query.lat;
     const lng = req.query.lng;
@@ -22,4 +22,8 @@ export const getStations = async (req, res) => {
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
+};
+
+module.exports = {
+  getStations,
 };

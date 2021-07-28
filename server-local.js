@@ -1,5 +1,5 @@
-import app from './express/server.js';
-import db from './database/connection.js';
+const app = require('./express/server.js');
+const db = require('./database/connection.js');
 
 db.authenticate().then(() => {
   app.listen(5000, () => {

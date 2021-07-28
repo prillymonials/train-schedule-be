@@ -1,7 +1,7 @@
-import bcrypt from 'bcrypt';
-import { addUser, getUserByUsername } from '../models/users.js';
+const bcrypt = require('bcrypt');
+const { addUser, getUserByUsername } = require('../models/users.js');
 
-export const login = async (req, res) => {
+const login = async (req, res) => {
   try {
     const username = req.body.username;
     const password = req.body.password;
@@ -27,7 +27,7 @@ export const login = async (req, res) => {
   }
 };
 
-export const register = async (req, res) => {
+const register = async (req, res) => {
   try {
     const username = req.body.username;
     const password = req.body.password;
@@ -40,4 +40,9 @@ export const register = async (req, res) => {
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
+};
+
+module.exports = {
+  login,
+  register,
 };

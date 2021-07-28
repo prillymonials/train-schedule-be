@@ -1,13 +1,13 @@
-import {
+const {
   createBook,
   getBooksByStatus,
   getRatesStation,
   getRoutesByFromCode,
   getStationDestination,
   getTimeByRouteAndStationCode,
-} from "../models/books.js";
+} = require("../models/books.js");
 
-export const getRoutesByOrigin = async (req, res) => {
+const getRoutesByOrigin = async (req, res) => {
   try {
     const stationCode = req.params.code;
     const routes = await getRoutesByFromCode(stationCode);
@@ -17,7 +17,7 @@ export const getRoutesByOrigin = async (req, res) => {
   }
 };
 
-export const getDestionationByRoutesId = async (req, res) => {
+const getDestionationByRoutesId = async (req, res) => {
   try {
     const routeId = req.params.routeId;
     const stations = await getStationDestination(routeId);
@@ -27,7 +27,7 @@ export const getDestionationByRoutesId = async (req, res) => {
   }
 };
 
-export const getTimeScheduleFromRoutesAndOrigin = async (req, res) => {
+const getTimeScheduleFromRoutesAndOrigin = async (req, res) => {
   try {
     const routeId = req.params.routeId;
     const stationCode = req.params.code;
@@ -38,7 +38,7 @@ export const getTimeScheduleFromRoutesAndOrigin = async (req, res) => {
   }
 };
 
-export const getRatesFromOriginAndDestination = async (req, res) => {
+const getRatesFromOriginAndDestination = async (req, res) => {
   try {
     const stationFrom = req.params.codeFrom;
     const stationTo = req.params.codeTo;
@@ -49,7 +49,7 @@ export const getRatesFromOriginAndDestination = async (req, res) => {
   }
 };
 
-export const postBook = async (req, res) => {
+const postBook = async (req, res) => {
   try {
     const userId = req.body.userId;
     const routeId = req.body.routeId;
@@ -66,7 +66,7 @@ export const postBook = async (req, res) => {
   }
 }
 
-export const getActiveBooks = async (req, res) => {
+const getActiveBooks = async (req, res) => {
   try {
     const userId = req.query.user_id;
     const books = await getBooksByStatus(userId, 'ACTIVE');
@@ -76,7 +76,7 @@ export const getActiveBooks = async (req, res) => {
   }
 };
 
-export const getHistoryBooks = async (req, res) => {
+const getHistoryBooks = async (req, res) => {
   try {
     const userId = req.query.user_id;
     const books = await getBooksByStatus(userId, 'HISTORY');
@@ -86,7 +86,7 @@ export const getHistoryBooks = async (req, res) => {
   }
 };
 
-export const getTodayBooks = async (req, res) => {
+const getTodayBooks = async (req, res) => {
   try {
     const userId = req.query.user_id;
     const books = await getBooksByStatus(userId, 'TODAY');
@@ -94,4 +94,15 @@ export const getTodayBooks = async (req, res) => {
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
+};
+
+module.exports = {
+  getRoutesByOrigin,
+  getDestionationByRoutesId,
+  getTimeScheduleFromRoutesAndOrigin,
+  getRatesFromOriginAndDestination,
+  postBook,
+  getActiveBooks,
+  getHistoryBooks,
+  getTodayBooks,
 };
