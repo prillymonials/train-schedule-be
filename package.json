@@ -1,11 +1,12 @@
 {
-  "name": "server",
+  "name": "train-schedule-be",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Train Schedule BE",
+  "main": "functions/server.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon --experimental-modules index.js"
+    "build": "netlify-lambda build express",
+    "start": "nodemon --experimental-modules server-local.js"
   },
   "keywords": [],
   "author": "",
@@ -17,7 +18,8 @@
     "mongoose": "^5.12.9",
     "mysql": "^2.18.1",
     "mysql2": "^2.2.5",
-    "sequelize": "^6.6.5"
+    "sequelize": "^6.6.5",
+    "serverless-http": "^2.7.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
